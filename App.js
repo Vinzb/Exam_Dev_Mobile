@@ -5,7 +5,8 @@ import Search from './src/components/Search';
 import StackNavigator from './src/navigation/StackNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import { getSearchMovies, getPopularMovies, getMovies } from './src/api/themoviedb'
+import { getSearchMovies, getPopularMovies, getMovies } from './src/api/themoviedb';
+import Film from './src/components/Film';
 
 /*const getMoviesFromApiAsync = async () => {
   try {
@@ -16,7 +17,6 @@ import { getSearchMovies, getPopularMovies, getMovies } from './src/api/themovie
     console.error(error);
   }
 };*/
-
 
 
 export default App = () => {

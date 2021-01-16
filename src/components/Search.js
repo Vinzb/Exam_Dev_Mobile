@@ -9,6 +9,7 @@ import { getMovies, getPopularMovies, getSearchMovies } from '../api/themoviedb'
 const Search = ({ navigation }) => {
 
   const [films, setFilms] = useState([]);
+  const [filmID, setID] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [nextOffset, setNextOffset] = useState(0);
   const [isMoreResults, setIsMoreResults] = useState(true);
@@ -20,7 +21,7 @@ const Search = ({ navigation }) => {
     setIsError(false);
     try {
       const filmsSearchResult = await getPopularMovies();
-      setFilms([...prevfilms, ...filmsSearchResult.films]);
+      setFilms(filmsSearchResult);
       /*if (filmsSearchResult.results_start + filmsSearchResult.results_shown < filmsSearchResult.total_results) {
         setIsMoreResults(true);
         setNextOffset(filmsSearchResult.results + filmsSearchResult.results_shown);
@@ -42,8 +43,8 @@ const Search = ({ navigation }) => {
     };
   };
 */
-  const navigateToFilmDetails = () => {
-    navigation.navigate("ViewFilm");
+  const navigateToFilmDetails = (filmID) => {
+    navigation.navigate("ViewFilm", {filmID});
   };
 
   return (
@@ -53,7 +54,7 @@ const Search = ({ navigation }) => {
           placeholder='Nom du film'
           style={styles.inputRestaurantName}
           onChangeText={(text) => setSearchTerm(text)}
-          onSubmitEditing={getSearchMovies}
+          onSubmitEditing={requestFilms}
         />
         <Button
           title='Rechercher'
@@ -61,11 +62,13 @@ const Search = ({ navigation }) => {
         />
       </View>
       {
+        isError ?
+          (<DisplayError message='Impossible de récupérer les films' />) :
           (<FlatList
             data={films}
-            keyExtractor={(item) => item.results.id}
+            keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <FilmlistItem filmData={item.results} onClick={navigateToFilmDetails} />
+              <FilmlistItem filmData = {item} onClick={navigateToFilmDetails} />
             )}
           />)
       }

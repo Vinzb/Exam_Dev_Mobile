@@ -1,28 +1,29 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
-const RestaurantListItem = ({ onClick, filmData }) => {
+const RestaurantlistItem = ({ onClick, filmData }) => {
 
-    /*const getThumbnail = () => {
-      if (restaurantData.thumb) {
+    const linkImg = 'https://image.tmdb.org/t/p/w500'+filmData.poster_path;
+
+    const getThumbnail = () => {
         return (
-          <Image style={styles.thumbnail} source={{ uri: restaurantData.thumb }} />
+          <Image style={styles.thumbnail} source={{ uri: linkImg }} />
         );
-      };
-      return (
-        <View style={styles.noThumbnailContainer}>
-        </View>
-      );
-    };*/
+    };
   
+    
+
     return (
-        <TouchableOpacity style={styles.container} onPress={onClick}>
+        <TouchableOpacity style={styles.container} onPress={() => { onClick(filmData.id) }}>
           <View style={styles.informationContainer}>
-            <Text style={styles.title}>
-              {filmData.original_title}
+            {getThumbnail()}
+            <Text>
+              {filmData.title}
             </Text>
-            <Text style={[styles.data, styles.cuisine]}
-              numberOfLines={1}>
+            <Text>
+              {filmData.date}
+            </Text>
+            <Text>
               {filmData.overview}
             </Text>
           </View>
@@ -30,7 +31,7 @@ const RestaurantListItem = ({ onClick, filmData }) => {
       );
     };
     
-    export default RestaurantListItem;
+    export default RestaurantlistItem;
 
     const styles = StyleSheet.create({
         container: {

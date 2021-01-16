@@ -2,52 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, ActivityIndicator, ScrollView, Image, Button } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getMovies } from '../api/themoviedb';
+import { getMovie, getPopularMovies } from '../api/themoviedb';
 
-const Film = ({ route, favMovies, dispatch }) => {
-  const [film, setFilm] = useState(null);
-  const [isError, setIsError] = useState(false);
+const Film = ({ filmID }) => {
 
-  useEffect(() => {
-    requestFilms();
-  }, []); // Uniquement à l'initialisation
+    const filmData = getMovie(filmID);
 
-  // Pourrait être directement déclarée dans useEffect
-  const requestFilm = async () => {
-    try {
-      const theMoviedb = await getMovies(route.params.filmID);
-      setFilm(theMoviedb);
-      setIsLoading(false);
-    } catch (error) {
-      setIsError(true);
-    }
-  }
-
-  return (
-    <View style={styles.container}>
-          (<View style={styles.containerLoading}>
-          </View>) :
-
-          (<ScrollView style={styles.containerScroll}>
-            <View style={styles.containerCardTop}>
-              <View style={styles.containerEstab}>
-                <Text style={styles.textName}>
-                  {film.original_title}
-                </Text>
-                <Text>
-                    {film.release_date}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.containerCardBottom}>
-                <Text style={styles.textContent}
-                  numberOfLines={1}>
-                  {film.overview}
-                </Text>
-            </View>
-          </ScrollView>)
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+                <View style={styles.containerCardTop}>
+                <View style={styles.containerEstab}>
+                    <Text style={styles.textName}>
+                    {filmData.title}
+                    </Text>
+                    <Text>
+                        {filmData.release_date}
+                    </Text>
+                </View>
+                </View>
+                <View style={styles.containerCardBottom}>
+                    <Text>
+                    {filmData.overview}
+                    </Text>
+                </View>
+        </View>
+    );
 };
 
 /*const mapStateToProps = (state) => {
