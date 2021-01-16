@@ -1,21 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Button, FlatList } from 'react-native';
+import Search from './src/components/Search';
+import StackNavigator from './src/navigation/StackNavigator';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { getSearchMovies, getPopularMovies, getMovies } from './src/api/themoviedb'
 
-export default function App() {
+/*const getMoviesFromApiAsync = async () => {
+  try {
+    const response = await fetch('https://reactnative.dev/movies.json');
+    const json = await response.json();
+    return json.movies;
+  } catch (error) {
+    console.error(error);
+  }
+};*/
+
+
+
+export default App = () => {
+
+    
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, padding: 50}}>
+      <NavigationContainer>
+        <StackNavigator/>
+      </NavigationContainer>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 24, // correction barre d'état
   },
 });
