@@ -5,6 +5,7 @@ export async function getMovie ( filmID ) {
       const url = `https://api.themoviedb.org/3/movie/${filmID}?api_key=${API_KEY}`;
       const response = await fetch(url);
       const json = await response.json();
+      console.log(json);
       return json;
     } catch (error) {
       console.error(error);
@@ -17,7 +18,6 @@ export async function getPopularMovies () {
     const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
     const response = await fetch(url);
     const json = await response.json();
-
     return json.results;
   } catch (error) {
     console.error(error);
