@@ -68,7 +68,7 @@ const Search = ({ navigation }) => {
             data={films}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <FilmlistItem filmData = {item} onClick={navigateToFilmDetails} />
+              <FilmlistItem filmData = {item} onClick={() => navigateToFilmDetails(item.id)} />
             )}
           />)
       }

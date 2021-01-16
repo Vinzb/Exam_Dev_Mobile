@@ -6,23 +6,39 @@ import { getMovie, getPopularMovies } from '../api/themoviedb';
 
 const Film = ({ filmID }) => {
 
-    const filmData = getMovie(filmID);
+    const [film, setFilm] = useState(null);
+
+    useEffect(() => {
+         requestFilm();
+      }, []);
+
+
+    const requestFilm = async() => {
+        try {
+            const getFilm = await getMovie(filmID);
+            setFilm(getFilm);
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
+      };
+
 
     return (
         <View style={styles.container}>
                 <View style={styles.containerCardTop}>
                 <View style={styles.containerEstab}>
                     <Text style={styles.textName}>
-                    {filmData.title}
+                    {film.title}
                     </Text>
                     <Text>
-                        {filmData.release_date}
+                        {film.release_date}
                     </Text>
                 </View>
                 </View>
                 <View style={styles.containerCardBottom}>
                     <Text>
-                    {filmData.overview}
+                    {film.overview}
                     </Text>
                 </View>
         </View>

@@ -11,8 +11,6 @@ const RestaurantlistItem = ({ onClick, filmData }) => {
         );
     };
   
-    
-
     return (
         <TouchableOpacity style={styles.container} onPress={() => { onClick(filmData.id) }}>
           <View style={styles.informationContainer}>

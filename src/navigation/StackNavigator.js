@@ -20,6 +20,7 @@ function RootStack() {
       <SearchNavigation.Screen
         name="ViewFilm"
         component={Film}
+        initialParams= {{filmID: 550}}
         options={{ title: 'Film' }}
       />
     </SearchNavigation.Navigator>
